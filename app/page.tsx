@@ -100,7 +100,7 @@ export default function Home() {
             </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Estimate Guardian</h1>
-              <p className="text-sm text-gray-600">Dental Fee Transparency Tool</p>
+              <p className="text-sm text-gray-600">NC Dental Price Checker | Stop Overcharging</p>
             </div>
           </div>
         </div>
@@ -281,8 +281,9 @@ export default function Home() {
 
       {/* Footer */}
       <footer className="max-w-4xl mx-auto px-4 py-8 text-center text-sm text-gray-600">
-        <p>Estimate Guardian helps patients understand dental pricing based on NC Industrial Commission guidelines.</p>
-        <p className="mt-2">For informational purposes only. Consult with your dental provider about specific costs.</p>
+        <p className="font-medium text-gray-900 mb-2">Free North Carolina Dental Price Verification Tool</p>
+        <p>Estimate Guardian helps NC patients check dental estimates against NC Industrial Commission workers' compensation fee schedules. Verify CDT codes, compare quoted prices, and identify potential overcharging by dental offices in Charlotte, Raleigh, Durham, and across North Carolina.</p>
+        <p className="mt-3 text-xs">For informational purposes only. Data source: NC Industrial Commission 2025 Dental Fee Schedule. Not a substitute for professional financial or legal advice.</p>
       </footer>
     </div>
   );
