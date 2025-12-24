@@ -4,23 +4,12 @@ import { useState } from 'react';
 import { Search, AlertCircle, CheckCircle, AlertTriangle, TrendingDown, DollarSign, MapPin, FileText } from 'lucide-react';
 
 interface AuditResult {
-  status: string;
-  severity: string;
-  cdt_code: string;
+  audit_status: string;
+  markup: string;
   procedure: string;
-  pricing: {
-    quoted_price: number;
-    fair_ceiling: number;
-    state_base: number;
-    markup_percentage: number;
-  };
-  location: {
-    zip_code: string;
-    area_type: string;
-    urban_adjustment_applied: boolean;
-  };
-  analysis: string;
-  reference: string;
+  user_price: number;
+  local_ceiling: number;
+  ai_analysis: string;
 }
 
 export default function Home() {
@@ -49,13 +38,21 @@ export default function Home() {
       });
 
       if (!response.ok) {
-        throw new Error('Failed to audit estimate');
+        const errorText = await response.text();
+        throw new Error(`API Error (${response.status}): ${errorText || 'Failed to audit estimate'}`);
+      }
+
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        const text = await response.text();
+        throw new Error(`Expected JSON response but got: ${text.substring(0, 100)}`);
       }
 
       const data = await response.json();
       setResult(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
+      console.error('API Error:', err);
     } finally {
       setLoading(false);
     }
@@ -63,6 +60,7 @@ export default function Home() {
 
   const getStatusColor = (status: string) => {
     switch (status) {
+      case 'RED FLAG':
       case 'RED_FLAG': return 'bg-red-500';
       case 'HIGH': return 'bg-orange-500';
       case 'FAIR': return 'bg-green-500';
@@ -219,11 +217,11 @@ export default function Home() {
         {result && (
           <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden">
             {/* Status Header */}
-            <div className={`${getStatusColor(result.status)} p-6 text-white`}>
+            <div className={`${getStatusColor(result.audit_status)} p-6 text-white`}>
               <div className="flex items-center gap-3">
-                {getStatusIcon(result.status)}
+                {getStatusIcon(result.audit_status)}
                 <div>
-                  <h3 className="text-xl font-bold">{getStatusText(result.status)}</h3>
+                  <h3 className="text-xl font-bold">{getStatusText(result.audit_status)}</h3>
                   <p className="text-sm opacity-90">{result.procedure}</p>
                 </div>
               </div>
@@ -235,16 +233,16 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div className="bg-gray-50 rounded-lg p-4">
                   <div className="text-xs text-gray-600 mb-1">Your Quote</div>
-                  <div className="text-2xl font-bold text-gray-900">${result.pricing.quoted_price.toFixed(2)}</div>
+                  <div className="text-2xl font-bold text-gray-900">${result.user_price.toFixed(2)}</div>
                 </div>
                 <div className="bg-blue-50 rounded-lg p-4">
                   <div className="text-xs text-blue-600 mb-1">Fair Ceiling</div>
-                  <div className="text-2xl font-bold text-blue-900">${result.pricing.fair_ceiling.toFixed(2)}</div>
+                  <div className="text-2xl font-bold text-blue-900">${result.local_ceiling.toFixed(2)}</div>
                 </div>
-                <div className={`rounded-lg p-4 ${result.pricing.markup_percentage > 30 ? 'bg-red-50' : result.pricing.markup_percentage > 10 ? 'bg-orange-50' : 'bg-green-50'}`}>
-                  <div className={`text-xs mb-1 ${result.pricing.markup_percentage > 30 ? 'text-red-600' : result.pricing.markup_percentage > 10 ? 'text-orange-600' : 'text-green-600'}`}>Markup</div>
-                  <div className={`text-2xl font-bold ${result.pricing.markup_percentage > 30 ? 'text-red-900' : result.pricing.markup_percentage > 10 ? 'text-orange-900' : 'text-green-900'}`}>
-                    {result.pricing.markup_percentage > 0 ? '+' : ''}{result.pricing.markup_percentage.toFixed(1)}%
+                <div className="bg-gradient-to-br from-purple-50 to-blue-50 rounded-lg p-4 border border-purple-200">
+                  <div className="text-xs text-purple-600 mb-1">Markup</div>
+                  <div className="text-2xl font-bold text-purple-900">
+                    {result.markup}
                   </div>
                 </div>
               </div>
@@ -254,10 +252,8 @@ export default function Home() {
                 <div className="text-sm font-medium text-gray-700 mb-2">Location Analysis</div>
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <MapPin className="w-4 h-4" />
-                  <span>{result.location.area_type}</span>
-                  {result.location.urban_adjustment_applied && (
-                    <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">+18% Urban Adjustment</span>
-                  )}
+                  <span>Zip Code: {zip}</span>
+                  <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">NC Industrial Commission 2025</span>
                 </div>
               </div>
 
@@ -269,14 +265,14 @@ export default function Home() {
                   </div>
                   <div>
                     <div className="text-sm font-medium text-gray-900 mb-1">Analysis & Recommendation</div>
-                    <p className="text-sm text-gray-700">{result.analysis}</p>
+                    <p className="text-sm text-gray-700">{result.ai_analysis}</p>
                   </div>
                 </div>
               </div>
 
               {/* Reference */}
               <div className="text-xs text-gray-500 text-center pt-4 border-t">
-                Data Source: {result.reference}
+                Data Source: NC Industrial Commission 2025
               </div>
             </div>
           </div>
