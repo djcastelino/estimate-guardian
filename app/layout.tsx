@@ -4,17 +4,17 @@ import './globals.css';
 
 const inter = Inter({ subsets: ['latin'] });
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export const metadata: Metadata = {
   title: 'Estimate Guardian - Dental Fee Transparency',
   description: 'Check if your dental office is overcharging. Compare prices against NC Industrial Commission guidelines.',
   manifest: '/manifest.json',
-  themeColor: '#2563eb',
-  viewport: 'width=device-width, initial-scale=1, maximum-scale=1',
-  appleWebApp: {
-    capable: true,
-    statusBarStyle: 'default',
-    title: 'Estimate Guardian'
-  }
+  themeColor: '#2563eb'
 };
 
 export default function RootLayout({
