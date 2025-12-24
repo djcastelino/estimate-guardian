@@ -1,13 +1,8 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa')({
-  dest: 'public',
-  register: true,
-  skipWaiting: true,
-  disable: process.env.NODE_ENV === 'development'
-});
-
-const nextConfig = withPWA({
+const nextConfig = {
   reactStrictMode: true,
-});
+  // Disable PWA for now to fix deployment error
+  // Will re-enable after fixing the configuration
+};
 
 module.exports = nextConfig;
