@@ -12,13 +12,13 @@ export const viewport = {
 
 export const metadata: Metadata = {
   title: 'Estimate Guardian | NC Dental Price Checker - Stop Overcharging',
-  description: 'Free NC dental estimate verification tool. Check if your dentist is overcharging based on NC Industrial Commission guidelines. Compare CDT codes, prices, and get instant audit results for North Carolina dental procedures.',
-  keywords: 'dental estimate, NC dental prices, dental overcharging, workers compensation dental, NC Industrial Commission, dental fee schedule, CDT codes, dental price checker, fair dental prices North Carolina',
+  description: 'Free NC dental estimate verification tool. Check if your dentist charges fair prices based on NC Medicaid fee schedules. Compare CDT codes, get instant pricing audits for North Carolina dental procedures.',
+  keywords: 'dental estimate, NC dental prices, dental overcharging, NC Medicaid dental, medicaid fee schedule, dental fee schedule, CDT codes, dental price checker, fair dental prices North Carolina, affordable dental NC',
   manifest: '/manifest.json',
   themeColor: '#2563eb',
   openGraph: {
     title: 'Estimate Guardian - Stop Dental Overcharging in NC',
-    description: 'Free tool to check if your dentist is overcharging. Compare against NC state guidelines instantly.',
+    description: 'Free tool to check if your dentist charges fair prices. Compare against NC Medicaid fee schedules instantly.',
     type: 'website',
     locale: 'en_US',
   },

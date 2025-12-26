@@ -113,7 +113,7 @@ export default function Home() {
           <div className="flex gap-3">
             <AlertCircle className="w-5 h-5 text-blue-600 flex-shrink-0 mt-0.5" />
             <div className="text-sm text-blue-900">
-              <strong>Know Your Rights:</strong> Check if your dental office is charging above NC Industrial Commission guidelines.
+              <strong>Know Your Rights:</strong> Check if your dental office charges fair prices compared to NC Medicaid fee schedules.
             </div>
           </div>
         </div>
@@ -179,7 +179,7 @@ export default function Home() {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 required
               />
-              <p className="text-xs text-gray-500 mt-1">Urban areas (Charlotte, Raleigh, Durham) have adjusted ceilings</p>
+              <p className="text-xs text-gray-500 mt-1">Compare against NC Medicaid reimbursement rates</p>
             </div>
 
             {/* Submit Button */}
@@ -253,7 +253,7 @@ export default function Home() {
                 <div className="flex items-center gap-2 text-sm text-gray-600">
                   <MapPin className="w-4 h-4" />
                   <span>Zip Code: {zip}</span>
-                  <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">NC Industrial Commission 2025</span>
+                  <span className="bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs">NC Medicaid 2022</span>
                 </div>
               </div>
 
@@ -272,7 +272,7 @@ export default function Home() {
 
               {/* Reference */}
               <div className="text-xs text-gray-500 text-center pt-4 border-t">
-                Data Source: NC Industrial Commission 2025
+                Data Source: NC Medicaid Fee Schedule (Effective Feb 10, 2022)
               </div>
             </div>
           </div>
@@ -282,8 +282,8 @@ export default function Home() {
       {/* Footer */}
       <footer className="max-w-4xl mx-auto px-4 py-8 text-center text-sm text-gray-600">
         <p className="font-medium text-gray-900 mb-2">Free North Carolina Dental Price Verification Tool</p>
-        <p>Estimate Guardian helps NC patients check dental estimates against NC Industrial Commission workers' compensation fee schedules. Verify CDT codes, compare quoted prices, and identify potential overcharging by dental offices in Charlotte, Raleigh, Durham, and across North Carolina.</p>
-        <p className="mt-3 text-xs">For informational purposes only. Data source: NC Industrial Commission 2025 Dental Fee Schedule. Not a substitute for professional financial or legal advice.</p>
+        <p>Estimate Guardian helps NC patients check dental estimates against NC Medicaid fee schedules. Verify CDT codes, compare quoted prices, and identify potential overcharging by dental offices in Charlotte, Raleigh, Durham, and across North Carolina. Know if you're paying fair prices for dental care.</p>
+        <p className="mt-3 text-xs">For informational purposes only. Data source: NC Medicaid Dental Fee Schedule (Effective February 10, 2022). Not a substitute for professional financial or legal advice.</p>
       </footer>
     </div>
   );
