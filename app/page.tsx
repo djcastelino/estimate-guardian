@@ -37,22 +37,28 @@ export default function Home() {
         })
       });
 
+      // Get the raw response text first
+      const rawText = await response.text();
+      console.log('Raw response:', rawText);
+
       if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(`API Error (${response.status}): ${errorText || 'Failed to audit estimate'}`);
+        throw new Error(`API Error (${response.status}): ${rawText || 'Failed to audit estimate'}`);
       }
 
-      const contentType = response.headers.get('content-type');
-      if (!contentType || !contentType.includes('application/json')) {
-        const text = await response.text();
-        throw new Error(`Expected JSON response but got: ${text.substring(0, 100)}`);
+      // Try to parse the JSON
+      let data;
+      try {
+        data = JSON.parse(rawText);
+      } catch (parseError) {
+        console.error('JSON Parse Error:', parseError);
+        console.error('Response text:', rawText);
+        throw new Error(`Invalid JSON response: ${rawText.substring(0, 200)}`);
       }
 
-      const data = await response.json();
       setResult(data);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
-      console.error('API Error:', err);
+      console.error('Full error:', err);
     } finally {
       setLoading(false);
     }
