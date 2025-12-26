@@ -41,17 +41,20 @@ export default function Home() {
           'Content-Type': 'application/json',
           'Accept': 'application/json'
         },
-        body: JSON.stringify(requestBody)
+        body: JSON.stringify(requestBody),
+        cache: 'no-cache'
       });
 
       console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
       console.log('Response headers:', {
         'content-type': response.headers.get('content-type'),
         'content-length': response.headers.get('content-length')
       });
       
-      // Get the raw response text first for debugging
-      const rawText = await response.text();
+      // Clone the response before reading to avoid consumption issues
+      const clonedResponse = response.clone();
+      const rawText = await clonedResponse.text();
       console.log('API Raw response:', rawText);
       console.log('Response length:', rawText.length);
 
