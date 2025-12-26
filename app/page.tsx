@@ -27,19 +27,33 @@ export default function Home() {
     setResult(null);
 
     try {
+      const requestBody = {
+        code: code.toUpperCase().startsWith('D') ? code.toUpperCase() : `D${code}`,
+        price: parseFloat(price),
+        zip: zip
+      };
+      
+      console.log('Sending request:', requestBody);
+      
       const response = await fetch('https://workflowly.online/webhook/audit-estimate', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          code: code.toUpperCase().startsWith('D') ? code.toUpperCase() : `D${code}`,
-          price: parseFloat(price),
-          zip: zip
-        })
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(requestBody)
       });
 
+      console.log('Response status:', response.status);
+      console.log('Response headers:', {
+        'content-type': response.headers.get('content-type'),
+        'content-length': response.headers.get('content-length')
+      });
+      
       // Get the raw response text first for debugging
       const rawText = await response.text();
       console.log('API Raw response:', rawText);
+      console.log('Response length:', rawText.length);
 
       if (!response.ok) {
         throw new Error(`API Error (${response.status}): ${rawText || 'Failed to audit estimate'}`);
