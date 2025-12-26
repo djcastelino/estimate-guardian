@@ -282,7 +282,7 @@ export default function Home() {
       {/* Footer */}
       <footer className="max-w-4xl mx-auto px-4 py-8 text-center text-sm text-gray-600">
         <p className="font-medium text-gray-900 mb-2">Free North Carolina Dental Price Verification Tool</p>
-        <p>Estimate Guardian helps NC patients check dental estimates against NC Medicaid fee schedules. Verify CDT codes, compare quoted prices, and identify potential overcharging by dental offices in Charlotte, Raleigh, Durham, and across North Carolina. Know if you're paying fair prices for dental care.</p>
+        <p>Estimate Guardian helps NC patients check dental estimates against NC Medicaid fee schedules. Verify CDT codes, compare quoted prices, and identify potential overcharging by dental offices in Charlotte, Raleigh, Durham, and across North Carolina. Know if you&apos;re paying fair prices for dental care.</p>
         <p className="mt-3 text-xs">For informational purposes only. Data source: NC Medicaid Dental Fee Schedule (Effective February 10, 2022). Not a substitute for professional financial or legal advice.</p>
       </footer>
     </div>
