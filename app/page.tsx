@@ -159,11 +159,11 @@ export default function Home() {
                 type="text"
                 value={code}
                 onChange={(e) => setCode(e.target.value)}
-                placeholder="e.g., D00120 or 00120"
+                placeholder="e.g., D0120 or 0120"
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
                 required
               />
-              <p className="text-xs text-gray-500 mt-1">Common codes: D00120 (Exam), D01110 (Cleaning), D02140 (Filling)</p>
+              <p className="text-xs text-gray-500 mt-1">Common codes: D0120 (Exam), D1110 (Cleaning), D2140 (Filling)</p>
             </div>
 
             {/* Price Input */}
