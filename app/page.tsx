@@ -37,9 +37,9 @@ export default function Home() {
         })
       });
 
-      // Get the raw response text first
+      // Get the raw response text first for debugging
       const rawText = await response.text();
-      console.log('Raw response:', rawText);
+      console.log('API Raw response:', rawText);
 
       if (!response.ok) {
         throw new Error(`API Error (${response.status}): ${rawText || 'Failed to audit estimate'}`);
